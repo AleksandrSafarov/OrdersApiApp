@@ -21,6 +21,7 @@ namespace OrdersApiApp.Service.ClientService
             await db.Clients.AddAsync(client);
             db.SaveChanges();
             return client;
+
         }
 
         public Task<bool> DeleteClient(int id)
