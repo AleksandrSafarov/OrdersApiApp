@@ -24,9 +24,11 @@ namespace OrdersApiApp.Service.ClientService
 
         }
 
-        public Task<bool> DeleteClient(int id)
+        public async Task<bool> DeleteClient(int id)
         {
-            throw new NotImplementedException();
+            await db.Clients.Where(c => c.Id == id).ExecuteDeleteAsync();
+            db.SaveChanges() ;
+            return true;
         }
 
         // получение всех клиентов
@@ -35,14 +37,20 @@ namespace OrdersApiApp.Service.ClientService
             return await db.Clients.ToListAsync();
         }
 
-        public Task<Client> GetClientById(int id)
+        public async Task<Client> GetClientById(int id)
         {
-            throw new NotImplementedException();
+            return await db.Clients.FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public Task<Client> UpdateClient(Client client)
+        public async Task<Client> UpdateClient(Client client)
         {
-            throw new NotImplementedException();
+            var entity = await db.Clients.FirstOrDefaultAsync(c => c.Id == client.Id);
+            if (entity != null)
+            {
+                entity.Name = client.Name;
+                db.SaveChanges();
+            }
+            return client;
         }
     }
 }

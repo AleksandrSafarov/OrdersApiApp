@@ -3,7 +3,7 @@
 namespace OrdersApiApp.Service.ClientService
 {
     // Имплементация-заглушка 
-    public class PlugDaoClient : IDaoClient
+    public class PlugDaoOrder : IDaoClient
     {
         public static List<Client> clients= new List<Client>(); // иммитация хранилища
 
