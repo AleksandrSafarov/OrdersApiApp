@@ -5,7 +5,7 @@
         public int Id { get; set; }
         public string Name { get; set; }
         public int Number { get; set; }
-        public ICollection<OrderProduct>? OrderProducts { get; set; }
+        public ICollection<OrderProduct>? OrderProduct { get; set; }
         public Product(int id, string name, int number)
         {
             Id = id;
