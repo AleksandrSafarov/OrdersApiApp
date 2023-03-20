@@ -1,6 +1,6 @@
 ﻿namespace OrdersApiApp.Model.Entity
 {
-    // сущность клиента - класс-хранилка данных о клиенте (DTO - data transfer object, data-class)
+    // сущность клиента -  класс-хранилка данных о клиенте (DTO - data transfer object, data-class)
     public class Client
     {
         public int Id { get; set; }
