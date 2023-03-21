@@ -2,12 +2,14 @@ using OrdersApiApp.Model;
 using OrdersApiApp.Model.Entity;
 using OrdersApiApp.Service.ClientService;
 using OrdersApiApp.Service.OrderService;
+using OrdersApiApp.Service.ProductService;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddTransient<IDaoClient, DbDaoClient>();
 builder.Services.AddTransient<IDaoOrder, DbDaoOrder>();
+builder.Services.AddTransient<IDaoProduct, DbDaoProduct>();
 
 var app = builder.Build();
 
@@ -71,6 +73,36 @@ app.MapGet("/order/get/{id}", async (HttpContext context, string id, IDaoOrder d
 {
     int id1 = int.Parse(id);
     return await dao.GetOrderById(id1);
+});
+
+
+///Product
+
+app.MapGet("/product/all", async (HttpContext context, IDaoProduct dao) =>
+{
+    return await dao.GetAllProducts();
+});
+
+app.MapPost("/product/add", async (HttpContext context, Product product, IDaoProduct dao) =>
+{
+    return await dao.AddProduct(product);
+});
+
+app.MapPost("/product/update", async (HttpContext context, Product product, IDaoProduct dao) =>
+{
+    return await dao.UpdateProduct(product);
+});
+
+app.MapGet("/product/delete/{id}", async (HttpContext context, string id, IDaoProduct dao) =>
+{
+    int id1 = int.Parse(id);
+    return await dao.DeleteProduct(id1);
+});
+
+app.MapGet("/product/get/{id}", async (HttpContext context, string id, IDaoProduct dao) =>
+{
+    int id1 = int.Parse(id);
+    return await dao.GetProductById(id1);
 });
 
 app.Run();
